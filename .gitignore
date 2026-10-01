@@ -1,0 +1,5 @@
+assets/*.mp3
+data-source/
+index-before-item-picker.html
+*.pyc
+__pycache__/

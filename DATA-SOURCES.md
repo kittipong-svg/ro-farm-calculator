@@ -1,0 +1,28 @@
+# RO offline reference database
+
+This is a searchable rAthena Renewal reference snapshot, **not a complete or verified GGT server database**. Items, monsters, drops and general-map spawns are sourced from rAthena. Map IDs without spawn data are retained. Instance and scripted event spawns are not comprehensively parsed. Map names are primarily map codes. Player market prices and THB exchange rates are not supplied.
+
+Source: https://github.com/rathena/rathena
+Snapshot commit: e985006171d2eb320ee512a653f4c83aea3d81b6
+Retrieved: 2026-09-30
+Copyright rAthena Development Team. Source data distributed under GNU GPL version 3 or later; the original source archive, including license and notices, is retained in data-source/rathena-source.zip. Preserve it when redistributing this database. Transformation source is build_database.py and embed_database.py.
+
+GGT overrides: Fresh Pear 820, Aromatic Flower 800, Wood Block 440, Congealed Poison 540 zeny per item, based on https://ro.gnjoy.in.th/patch-update-5-aug-2026/. These are published NPC sale prices, not player market prices. Unverified GGT prices remain unknown even when a reference rAthena price exists. Missing reference price is null, never silently converted to zero.
+
+Trunk's reference NPC sale price is overridden to 22 zeny from https://www.divine-pride.net/database/item/1019/trunk. This has not been verified in GGT; the user can edit the price in the calculator. The calculator applies Overcharge Lv.10 to every priced row when checked, using `floor(base * 1.24)` per item.
+
+Item icons use Divine Pride's image endpoint (`https://www.divine-pride.net/img/items/item/iRO/{id}`). Seven common icons are cached locally in `icons/`; other icons need an internet connection and are hidden if unavailable. Icon IDs are reference IDs and may differ for server-specific assets.
+
+Build: Python with PyYAML; run `python build_database.py` then `python embed_database.py`. The former downloads the current upstream snapshot; its resulting commit is recorded in database.json. The latter embeds all data and UI in index.html for direct offline opening. No API key is embedded or required. Divine Pride links are external detail links, not a live database sync.
+
+The bottom reference library is restored from the earlier offline library UI and embedded from `library-ui.js`. The one-hour Kordt Forest example is embedded from `simulation-ui.js`. Its three monster drop tables use Divine Pride: [Timbers](https://www.divine-pride.net/database/monster/21954/timbers), [Deadween](https://www.divine-pride.net/database/monster/21949/deadween), and [Burning Night](https://www.divine-pride.net/database/monster/21946/burning-night). The [GGT map announcement](https://ro.gnjoy.in.th/dimensional-rift-geffen-dungeon-26-august-2026/) confirms the map and states that monster and drop lists may change, but does not supply per-monster spawn counts or a GGT-specific drop table. The simulator therefore starts with an explicitly hypothetical 100 kills per hour for each monster. GGT-confirmed Wood Block and Congealed Poison prices are filled automatically; other drops use an rAthena reference NPC price where available and can be edited to match actual sale prices. Fresh Pear and Aromatic Flower are excluded from the example because their source among these three monsters is unverified. Expected drops are fractional averages, not guaranteed loot. External reference links require internet even though the calculator and library search work offline.
+
+The one-hour simulator can now switch from Kordt Forest to any reference map with monster spawn entries. For other maps, monster and drop lists come from rAthena and the initial kills/hour are zero; spawn counts are not treated as kills/hour. Item sale prices start from GGT-confirmed NPC prices when available, otherwise rAthena reference NPC prices, and remain editable. Its Overcharge checkbox is independent of the actual-session calculator. The simulator caches inputs separately per map.
+
+Visual and audio: assets/payon-forest.png is an original AI-generated background inspired by a peaceful fantasy forest village; no game art was copied into the site. The Payon music control uses assets/payon-theme.mp3 copied from the user's installed GGT RagnarokOnline client (BGM/14.mp3, Theme of Payon) for this local personal page. The user can pick a different local audio file; that selection is stored in the browser's IndexedDB. The page attempts to play on load and offers a Play button when the browser blocks audible autoplay. The soundtrack is game content and should not be redistributed with this page without the right to do so.
+
+The map picker in section 03 also accepts typed searches by map name, map code, or monster name and shows matching maps before selection.
+
+Drop-rate simulation: Section 03 uses kills/hour × min(base item drop chance × entered overall drop-rate percentage / 100, 100%) for each monster-item pair, then sums expected item quantities across monsters. The default overall rate is 100%; 150% multiplies base chances by 1.5. The user enters a single effective overall rate for Gum and server events because the actual GGT stacking order and caps are unverified. This is a deliberately simplified estimate, not a claim about the exact GGT drop formula. The base chance and adjusted chance appear per item, along with an example calculation.
+
+Monster portraits in section 03 use Divine Pride static monster PNGs (https://static.divine-pride.net/images/mobs/png/{id}.png). Nine portraits for Kordt Forest and cmd_fild04 are cached in monsters/ for offline viewing; other maps load portraits when online. If an image is unavailable, its card retains the monster name and input.

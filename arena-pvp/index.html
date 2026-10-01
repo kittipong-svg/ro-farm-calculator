@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rune Duel · Fantasy PvP</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#111827;color:#f5eedc;font:16px system-ui,'Segoe UI',sans-serif}main{max-width:1100px;margin:auto;padding:22px}h1{margin:0;font-size:clamp(26px,5vw,44px)}p{color:#c9c4b8}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.badge{background:#2b3040;border:1px solid #747089;border-radius:12px;padding:8px 14px}canvas{display:block;width:100%;aspect-ratio:16/9;border:3px solid #b9975d;border-radius:15px;background:#405e51;box-shadow:0 18px 50px #0008;touch-action:none}.panel{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}.card{background:#222b3b;border:1px solid #536070;border-radius:12px;padding:15px}.card strong{font-size:19px}.blue{color:#89d8ff}.red{color:#ffaaa2}kbd{display:inline-block;background:#101724;border:1px solid #697181;border-radius:5px;padding:2px 6px;margin:2px;color:white}button{background:#d5a65e;border:0;border-radius:9px;padding:11px 18px;color:#241a17;font:700 16px system-ui;cursor:pointer}button:hover{background:#f4c981}.actions{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}#message{color:#f6dca8}small{color:#c5c8c8}@media(max-width:650px){.panel{grid-template-columns:1fr}main{padding:12px}}
+select{margin-left:8px;background:#111827;color:#f5eedc;border:1px solid #758296;border-radius:7px;padding:6px;font:inherit}.card div{margin-top:8px;line-height:1.8}
+</style>
+</head>
+<body><main>
+<div class="top"><div><div style="color:#d5a65e;letter-spacing:3px;font-size:12px">PIXEL FANTASY · LOCAL PVP</div><h1>⚔️ Rune Duel</h1><p>เลือกอาชีพ ใช้สกิล และประลองกันในลานเมืองแฟนตาซี</p></div><div class="badge" id="score">น้ำเงิน 0 : 0 แดง</div></div>
+<canvas id="game" width="960" height="540" aria-label="สนามต่อสู้ PvP"></canvas>
+<div class="actions"><button id="restart">เริ่มใหม่</button><span id="message">เลือกอาชีพแล้วเข้าประลอง · ชนะ 3 รอบก่อนเป็นผู้ชนะ</span></div>
+<div class="panel"><div class="card"><strong class="blue">ผู้เล่น 1</strong> <select id="class1" aria-label="อาชีพผู้เล่น 1"><option value="knight">⚔️ นักดาบ</option><option value="mage">🔮 จอมเวท</option><option value="archer">🏹 นักธนู</option></select><div>เดิน <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> · โจมตี <kbd>F</kbd> · สกิล <kbd>G</kbd> · พุ่ง <kbd>H</kbd> · ยา <kbd>Q</kbd></div></div><div class="card"><strong class="red">ผู้เล่น 2</strong> <select id="class2" aria-label="อาชีพผู้เล่น 2"><option value="knight">⚔️ นักดาบ</option><option value="mage" selected>🔮 จอมเวท</option><option value="archer">🏹 นักธนู</option></select><div>เดิน <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> · โจมตี <kbd>J</kbd> · สกิล <kbd>K</kbd> · พุ่ง <kbd>L</kbd> · ยา <kbd>I</kbd></div></div></div>
+<p><small>ต้นแบบนี้เป็นเกมต้นฉบับที่ได้แรงบันดาลใจจากเกมแฟนตาซี MMORPG และใช้ภาพที่วาดด้วยโค้ดทั้งหมด</small></p>
+</main><script src="game.js"></script></body></html>
